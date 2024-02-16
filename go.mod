@@ -1,4 +1,4 @@
-module github.com/nikojunttila/template
+module github.com/nikojunttila/go-azure-appservice
 
 go 1.21.0
 
