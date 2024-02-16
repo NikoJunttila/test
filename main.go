@@ -15,9 +15,9 @@ func main() {
 	r := chi.NewRouter()
 
 	godotenv.Load()
-	portString := os.Getenv("PORT")
+	portString := os.Getenv("HTTP_PLATFORM_PORT")
 	if portString == "" {
-		log.Fatal("port not found in env")
+		portString = "8080"
 	}
 
 	r.Use(cors.Handler(cors.Options{
@@ -32,15 +32,15 @@ func main() {
 	}))
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("welcome"))
+		w.Write([]byte("Hello azure"))
 	})
 
-  v1Router := chi.NewRouter()
+	v1Router := chi.NewRouter()
 
-  v1Router.Get("/healthz", handlerReadiness)
-  v1Router.Get("/err",handlerErr)
+	v1Router.Get("/healthz", handlerReadiness)
+	v1Router.Get("/err", handlerErr)
 
-  r.Mount("/v1", v1Router)
+	r.Mount("/v1", v1Router)
 
 	fmt.Println("listening on port:" + portString)
 
