@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'derpz'
           slot-name: 'production'
-          package: .
+          package: ${{env.DOTNET_ROOT}}/myapp
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_6a9aa027453149cd8af193d36e1c0187 }}
