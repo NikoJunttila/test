@@ -31,16 +31,15 @@ func main() {
 		MaxAge:           300, // Maximum value not ignored by any of major browsers
 	}))
 
-	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
+	r.Get("/json", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Hello azure"))
 	})
 
 	v1Router := chi.NewRouter()
+	r.Mount("/v1", v1Router)
 
 	v1Router.Get("/healthz", handlerReadiness)
 	v1Router.Get("/err", handlerErr)
-
-	r.Mount("/v1", v1Router)
 
 	fmt.Println("listening on port:" + portString)
 
